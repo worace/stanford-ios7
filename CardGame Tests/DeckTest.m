@@ -34,6 +34,22 @@
     XCTAssertNil([testDeck drawRandomCard]);
 }
 
+- (void)testCardsInitsToEmptyArray
+{
+    Deck *testDeck = [[Deck alloc] init];
+    XCTAssertEqualObjects([testDeck cards], @[]);
+}
+
+- (void)addCardAddsToCards
+{
+    Deck *testDeck = [[Deck alloc] init];
+    XCTAssertEqual([[testDeck cards] count], 0);
+    [testDeck addCard: [[Card alloc] init]];
+    XCTAssertEqual([[testDeck cards] count], 1);
+    [testDeck addCard: [[Card alloc] init]];
+    XCTAssertEqual([[testDeck cards] count], 2);
+}
+
 - (void)testDeckWithSingleCardGivesThatCardAsRandomCard
 {
     Deck *testDeck = [[Deck alloc] init];
