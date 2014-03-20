@@ -76,7 +76,7 @@
     XCTAssertEqualObjects(testPlayingCard.contents, @"?♠", @"Should Combine Suit and Rank to create Contents");
 }
 
-- (void)testSettungInvalidSuitRemainsUndefined
+- (void)testSettingInvalidSuitRemainsUndefined
 {
     PlayingCard *testPlayingCard = [[PlayingCard alloc] init];
     testPlayingCard.suit = @"PIZZA";
@@ -84,11 +84,19 @@
 
 }
 
-- (void)testValidSuitsGivesAListOfSuits
+- (void)testSettingExcessiveRankRemainsUndefined
 {
-    [PlayingCard validSuits];
-//    XCTAssertEqualObjects([PlayingCard validSuits],  @[@"♥",@"♦",@"♠",@"♣"]);
+    PlayingCard *testPlayingCard = [[PlayingCard alloc] init];
+    testPlayingCard.rank = 24;
+    XCTAssertEqual(0, testPlayingCard.rank, @"Should Combine Suit and Rank to create Contents");
+    
+}
 
+- (void)testSettingNegativeRankRemainsUndefined
+{
+    PlayingCard *testPlayingCard = [[PlayingCard alloc] init];
+    testPlayingCard.rank = -24;
+    XCTAssertEqual(0, testPlayingCard.rank, @"Should Combine Suit and Rank to create Contents");
 }
 
 @end
