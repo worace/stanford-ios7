@@ -66,6 +66,7 @@
     testCard.contents = @"test card";
     [testDeck addCard:testCard];
     [testDeck drawRandomCard];
+    XCTAssertEqualObjects([testDeck drawRandomCard], nil);
     XCTAssertNil([testDeck drawRandomCard]);
 }
 
