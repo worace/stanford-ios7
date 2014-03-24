@@ -47,4 +47,19 @@
         _rank = rank;
     }
 }
+
+- (int)match:(NSArray *)otherCards
+{
+    PlayingCard *cardToMatch = [otherCards firstObject];
+    if (cardToMatch) {
+        if (cardToMatch.rank == self.rank) {
+            return 4;
+        } else if ([cardToMatch.suit isEqualToString:self.suit]) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    return 0;
+}
 @end

@@ -99,4 +99,57 @@
     XCTAssertEqual(0, testPlayingCard.rank, @"Should Combine Suit and Rank to create Contents");
 }
 
+- (void)testMatchGives4PointsForRankMatch
+{
+    PlayingCard *testPlayingCard = [[PlayingCard alloc] init];
+    testPlayingCard.rank = 10;
+    PlayingCard *rankMatch = [[PlayingCard alloc] init];
+    rankMatch.rank = 10;
+    XCTAssertEqual(4, [testPlayingCard match:@[rankMatch]]);
+}
+
+- (void)testMatchGives1PointForSuitMatch
+{
+    PlayingCard *testPlayingCard = [[PlayingCard alloc] init];
+    testPlayingCard.suit = @"♥";
+    testPlayingCard.rank = 1;
+    PlayingCard *suitMatch = [[PlayingCard alloc] init];
+    suitMatch.suit = @"♥";
+    suitMatch.rank = 2;
+    XCTAssertEqual(1, [testPlayingCard match:@[suitMatch]]);
+
+}
+
+- (void)testMatchIgnoresMultipleMatchingCards
+{
+    PlayingCard *testPlayingCard = [[PlayingCard alloc] init];
+    testPlayingCard.suit = @"♥";
+    testPlayingCard.rank = 1;
+    
+    PlayingCard *suitMatch = [[PlayingCard alloc] init];
+    suitMatch.suit = @"♥";
+    suitMatch.rank = 2;
+    
+    PlayingCard *otherSuitMatch = [[PlayingCard alloc] init];
+    otherSuitMatch.suit = @"♥";
+    otherSuitMatch.rank = 2;
+    
+    NSArray *matches = @[suitMatch, otherSuitMatch];
+    XCTAssertEqual(1, [testPlayingCard match:matches]);
+    
+}
+
+- (void)testMatchGives0ForNoMatch
+{
+    PlayingCard *testPlayingCard = [[PlayingCard alloc] init];
+    testPlayingCard.suit = @"♥";
+    testPlayingCard.rank = 1;
+    
+    PlayingCard *noMatch = [[PlayingCard alloc] init];
+    noMatch.suit = @"♣";
+    noMatch.rank = 2;
+    XCTAssertEqual(0, [testPlayingCard match:@[noMatch]]);
+}
+
+
 @end
