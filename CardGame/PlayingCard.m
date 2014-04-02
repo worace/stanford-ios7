@@ -11,6 +11,9 @@
 
 @implementation PlayingCard
 
+static const int MISMATCH_PENALTY = -2;
+static const int MATCH_BONUS = 4;
+
 + (NSArray *)validSuits
 {
     return @[@"♥",@"♦",@"♠",@"♣"];
@@ -53,11 +56,11 @@
     PlayingCard *cardToMatch = [otherCards firstObject];
     if (cardToMatch) {
         if (cardToMatch.rank == self.rank) {
-            return 4;
+            return 4 * MATCH_BONUS;
         } else if ([cardToMatch.suit isEqualToString:self.suit]) {
-            return 1;
+            return 1 * MATCH_BONUS;
         } else {
-            return 0;
+            return MISMATCH_PENALTY;
         }
     }
     return 0;

@@ -47,4 +47,18 @@
 
 }
 
+- (void)testMatchReturnsMinus1ForNoMatch
+{
+    Card *testCard = [[Card alloc] init];
+    testCard.contents = @"one";
+    Card *matchCard = [[Card alloc] init];
+    matchCard.contents = @"bogus";
+    
+    NSArray *cardsToMatch = @[matchCard];
+    
+    XCTAssertEqual([testCard match:cardsToMatch], -1, @"Should be negative for no match");
+    
+}
+
+
 @end
