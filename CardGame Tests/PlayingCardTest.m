@@ -132,7 +132,16 @@
    
 }
 
-- (void)testMatchIgnoresMultipleMatchingCards
+- (void)testMatchGives0ForNoCardsProvided
+{
+    PlayingCard *testPlayingCard = [[PlayingCard alloc] init];
+    testPlayingCard.suit = @"♥";
+    testPlayingCard.rank = 1;
+    
+    XCTAssertEqual(0, [testPlayingCard match:@[]]);
+}
+
+- (void)testMatchGivesCumulativeScoreForMultipleMatches
 {
     PlayingCard *testPlayingCard = [[PlayingCard alloc] init];
     testPlayingCard.suit = @"♥";
@@ -144,20 +153,11 @@
     
     PlayingCard *otherSuitMatch = [[PlayingCard alloc] init];
     otherSuitMatch.suit = @"♥";
-    otherSuitMatch.rank = 2;
+    otherSuitMatch.rank = 3;
     
     NSArray *matches = @[suitMatch, otherSuitMatch];
-    XCTAssertEqual(4, [testPlayingCard match:matches]);
+    XCTAssertEqual(8, [testPlayingCard match:matches]);
     
-}
-
-- (void)testMatchGives0ForNoCardsProvided
-{
-    PlayingCard *testPlayingCard = [[PlayingCard alloc] init];
-    testPlayingCard.suit = @"♥";
-    testPlayingCard.rank = 1;
-    
-    XCTAssertEqual(0, [testPlayingCard match:@[]]);
 }
 
 

@@ -53,16 +53,16 @@ static const int MATCH_BONUS = 4;
 
 - (int)match:(NSArray *)otherCards
 {
-    PlayingCard *cardToMatch = [otherCards firstObject];
-    if (cardToMatch) {
+    NSInteger score = 0;
+    for (PlayingCard *cardToMatch in otherCards) {
         if (cardToMatch.rank == self.rank) {
-            return 4 * MATCH_BONUS;
+            score += 4 * MATCH_BONUS;
         } else if ([cardToMatch.suit isEqualToString:self.suit]) {
-            return 1 * MATCH_BONUS;
+            score += 1 * MATCH_BONUS;
         } else {
-            return MISMATCH_PENALTY;
+            score += MISMATCH_PENALTY;
         }
     }
-    return 0;
+    return score;
 }
 @end
